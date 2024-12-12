@@ -5,7 +5,11 @@ $password = "azl,kkk!";
 $database = "location";
 
 $connection = mysqli_connect($server, $user,$password, $database);
+$sql_command1 = "SELECT * FROM cars";
+$action1 = mysqli_query($connection, $sql_command1);
 
+$sql_command2 = "SELECT * FROM clients";
+$action2 = mysqli_query($connection,$sql_command2);
 ?>
 
 <!DOCTYPE html>
@@ -100,18 +104,18 @@ $connection = mysqli_connect($server, $user,$password, $database);
         <div class="inputsAndLabels h-[85%]">
             <label for="" class="block">
                 Clients:
-                <select class="block w-full rounded-[10px]" name="" id="">
-                    <option value="">Client 1</option>
-                    <option value="">Client 2</option>
-                    <option value="">Client 3</option>
+                <select class="block w-full rounded-[10px]" name="addClientSelect">
+                    <?php while($line2 = mysqli_fetch_assoc($action2)): ?>
+                    <option value="<?php echo $line2["id"]; ?>"><?php echo $line2["name"]; ?></option>
+                    <?php endwhile; ?>
                 </select>
             </label>
             <label for="">
                 Cars:
-                <select class="block w-full rounded-[10px]" name="" id="">
-                    <option value="">Car 1</option>
-                    <option value="">Car 2</option>
-                    <option value="">Car 3</option>
+                <select class="block w-full rounded-[10px]" name="" name="AddCarSelect">
+                    <?php while($line1 = mysqli_fetch_assoc($action1)): ?>
+                    <option value="<?php echo $line1["id"]; ?>"><?php echo $line1["name"]; ?></option>
+                    <?php endwhile; ?>
                 </select>
             </label>
             <label for="">
@@ -186,3 +190,5 @@ $connection = mysqli_connect($server, $user,$password, $database);
     <script src="./js/scriptContracts.js"></script>
 </body>
 </html>
+
+
