@@ -1,4 +1,15 @@
+<?php
+$server = "localhost";
+$user = "root";
+$password = "azl,kkk!";
+$database = "location";
 
+$connection = mysqli_connect($server, $user, $password, $database);
+$sql_command = "SELECT * FROM clients;";
+$action = mysqli_query($connection, $sql_command);
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,78 +30,33 @@
     </div>
 
     <main class="flex justify-center flex-wrap gap-5 mt-[30px] p-5">
-    <div id="1" class="cardClient w-[300px] overflow-hidden bg-[cadetblue] rounded-[10px]">
-            <input type="text" class="hiddenClientId" hidden>
+        <?php while($line = mysqli_fetch_assoc($action)): ?>
+    <div id="<?php echo $line["id"]; ?>" class="cardClient w-[300px] overflow-hidden bg-[cadetblue] rounded-[10px]">
+            <input type="text" value="<?php echo $line["id"] ?>" class="hiddenClientId" hidden>
             <img src="https://img.freepik.com/vecteurs-libre/homme-affaires-caractere-avatar-isole_24877-60111.jpg?semt=ais_hybrid" alt="">
             <div class="clientInfo flex justify-around m-2.5">
-                <p>Name: <span class="clientName">Reda</span></p>
-                <p>CIN: <span class="clientCIN">J125486</span></p>
+                <p>Name: <span class="clientName"><?php echo $line["name"]; ?></span></p>
+                <p>CIN: <span class="clientCIN"><?php echo $line["cin"]; ?></span></p>
             </div>
             <div class="clientButtons buttons flex justify-around m-2.5">
                 <button class="deleteClient bg-[chocolate] text-[white] p-[5px] rounded-[5px]">Delete</button>
                 <button class="modifyClient bg-[chocolate] text-[white] p-[5px] rounded-[5px]">Modify</button>
             </div>
     </div>
+    <?php endwhile; ?>
 
-    <div id="2" class="cardClient w-[300px] overflow-hidden bg-[cadetblue] rounded-[10px]">
-            <img src="https://img.freepik.com/vecteurs-libre/homme-affaires-caractere-avatar-isole_24877-60111.jpg?semt=ais_hybrid" alt="">
-            <div class="clientInfo flex justify-around m-2.5">
-            <p>Name: <span class="clientName">Reda</span></p>
-            <p>CIN: <span class="clientCIN">C125412</span></p>
-            </div>
-            <div class="clientButtons buttons flex justify-around m-2.5">
-                <button class="deleteClient bg-[chocolate] text-[white] p-[5px] rounded-[5px]">Delete</button>
-                <button class="modifyClient bg-[chocolate] text-[white] p-[5px] rounded-[5px]">Modify</button>
-            </div>
-    </div>
-
-    <div id="3" class="cardClient w-[300px] overflow-hidden bg-[cadetblue] rounded-[10px]">
-            <img src="https://img.freepik.com/vecteurs-libre/homme-affaires-caractere-avatar-isole_24877-60111.jpg?semt=ais_hybrid" alt="">
-            <div class="clientInfo flex justify-around m-2.5">
-            <p>Name: <span class="clientName">Reda</span></p>
-            <p>CIN: <span class="clientCIN">X210325</span></p>
-            </div>
-            <div class="clientButtons buttons flex justify-around m-2.5">
-                <button class="deleteClient bg-[chocolate] text-[white] p-[5px] rounded-[5px]">Delete</button>
-                <button class="modifyClient bg-[chocolate] text-[white] p-[5px] rounded-[5px]">Modify</button>
-            </div>
-    </div>
-
-    <div id="4" class="cardClient w-[300px] overflow-hidden bg-[cadetblue] rounded-[10px]">
-            <img src="https://img.freepik.com/vecteurs-libre/homme-affaires-caractere-avatar-isole_24877-60111.jpg?semt=ais_hybrid" alt="">
-            <div class="clientInfo flex justify-around m-2.5">
-            <p>Name: <span class="clientName">Reda</span></p>
-            <p>CIN: <span class="clientCIN">Q2102354</span></p>
-            </div>
-            <div class="clientButtons buttons flex justify-around m-2.5">
-                <button class="deleteClient bg-[chocolate] text-[white] p-[5px] rounded-[5px]">Delete</button>
-                <button class="modifyClient bg-[chocolate] text-[white] p-[5px] rounded-[5px]">Modify</button>
-            </div>
-    </div>
-
-    <div id="5" class="cardClient w-[300px] overflow-hidden bg-[cadetblue] rounded-[10px]">
-            <img src="https://img.freepik.com/vecteurs-libre/homme-affaires-caractere-avatar-isole_24877-60111.jpg?semt=ais_hybrid" alt="">
-            <div class="clientInfo flex justify-around m-2.5">
-            <p>Name: <span class="clientName">Reda</span></p>
-            <p>CIN: <span class="clientCIN">M145287</span></p>
-            </div>
-            <div class="clientButtons buttons flex justify-around m-2.5">
-                <button class="deleteClient bg-[chocolate] text-[white] p-[5px] rounded-[5px]">Delete</button>
-                <button class="modifyClient bg-[chocolate] text-[white] p-[5px] rounded-[5px]">Modify</button>
-            </div>
-    </div>
 
     </main>
 <!-- Form add client -->
-    <form class="AddClientForm hidden w-[600px] bg-[brown] h-[300px] fixed left-[calc(50%_-_300px)] p-10 rounded-[20px] top-[120px]" action="" method="">
+    <form class="AddClientForm hidden w-[600px] bg-[brown] h-[300px] fixed left-[calc(50%_-_300px)] p-10 rounded-[20px] top-[120px]" action="./php/addClient.php" method="POST">
         <div class="inputsAndLabels h-[85%]">
             <label for="">
             Name:
-                <input class="w-full rounded-[10px]" type="text">
+                <input name="name" class="w-full rounded-[10px]" type="text">
             </label>
             <label for="">
             CIN:
-                <input class="w-full rounded-[10px]" type="text">
+                <input name="cin" class="w-full rounded-[10px]" type="text">
             </label>
         </div>
         <div class="addClientButts clientButtons buttons flex justify-around m-2.5">
@@ -101,7 +67,7 @@
     </form>
 
 <!-- Form Modify client -->
-<form class="modifyClientForm hidden w-[600px] bg-[brown] h-[300px] fixed left-[calc(50%_-_300px)] p-10 rounded-[20px] top-[120px]" action="" method="">
+<form class="modifyClientForm hidden w-[600px] bg-[brown] h-[300px] fixed left-[calc(50%_-_300px)] p-10 rounded-[20px] top-[120px]" action="./php/modifyClient.php" method="POST">
         <input class="clientIdModify" type="text" hidden>
         <div class="inputsAndLabels h-[85%]">
             <label for="">
