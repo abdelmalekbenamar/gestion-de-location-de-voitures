@@ -68,15 +68,15 @@ $action = mysqli_query($connection, $sql_command);
 
 <!-- Form Modify client -->
 <form class="modifyClientForm hidden w-[600px] bg-[brown] h-[300px] fixed left-[calc(50%_-_300px)] p-10 rounded-[20px] top-[120px]" action="./php/modifyClient.php" method="POST">
-        <input class="clientIdModify" type="text" hidden>
+        <input name="id" class="clientIdModify" type="text" hidden>
         <div class="inputsAndLabels h-[85%]">
             <label for="">
             Name:
-                <input class="modifyNameInput w-full rounded-[10px]" type="text">
+                <input name="name" class="modifyNameInput w-full rounded-[10px]" type="text">
             </label>
             <label for="">
             CIN:
-                <input class="modifyCinInput w-full rounded-[10px]" type="text">
+                <input name="cin" class="modifyCinInput w-full rounded-[10px]" type="text">
             </label>
         </div>
         <div class="addClientButts clientButtons buttons flex justify-around m-2.5">
@@ -87,8 +87,8 @@ $action = mysqli_query($connection, $sql_command);
 </form>
 
 <!-- Form Delete Client -->
-<form class="deleteClientForm hidden w-[600px] bg-[brown] h-[300px] fixed left-[calc(50%_-_300px)] p-10 rounded-[20px] top-[120px]" action="" method="">
-        <input class="clientIdDelete" type="text" hidden>
+<form class="deleteClientForm hidden w-[600px] bg-[brown] h-[300px] fixed left-[calc(50%_-_300px)] p-10 rounded-[20px] top-[120px]" action="./php/deleteClient.php" method="POST">
+        <input name="id" class="clientIdDelete" type="text" hidden>
         <div class="h-[85%] text-center text-white">
             <h1>Are You Sure ?</h1>
         </div>

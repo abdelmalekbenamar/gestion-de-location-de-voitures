@@ -1,4 +1,12 @@
+<?php 
+$server = "localhost";
+$user = "root";
+$password = "azl,kkk!";
+$database = "location";
 
+$connection = mysqli_connect($server, $user,$password, $database);
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
