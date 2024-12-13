@@ -5,11 +5,14 @@ $password = "azl,kkk!";
 $database = "location";
 
 $connection = mysqli_connect($server, $user,$password, $database);
-$sql_command1 = "SELECT * FROM cars";
+$sql_command1 = "SELECT * FROM cars WHERE rented = false;";
 $action1 = mysqli_query($connection, $sql_command1);
 
 $sql_command2 = "SELECT * FROM clients";
 $action2 = mysqli_query($connection,$sql_command2);
+
+$sql_command3 = "SELECT contracts.id AS id, dateBegin, dateEnd, clients.name AS clientName, cars.name AS carName FROM contracts JOIN clients ON clients.id = contracts.clientId JOIN cars ON cars.id = contracts.carId";
+$action3 = mysqli_query($connection, $sql_command3);
 ?>
 
 <!DOCTYPE html>
@@ -31,75 +34,27 @@ $action2 = mysqli_query($connection,$sql_command2);
     </div>
     <main class="flex justify-center flex-wrap gap-5 mt-[30px] p-5">
 
-    <div id="1" class="w-[300px] overflow-hidden bg-[cadetblue] rounded-[10px]">
+    <?php while($line = mysqli_fetch_assoc($action3)): ?>
+    <div id="<?php echo $line["id"]; ?>" class="w-[300px] overflow-hidden bg-[cadetblue] rounded-[10px]">
         <img src="https://mae-avocats.com/wp-content/uploads/2022/06/images-contrat.jpg" alt="">
-        <div class="contratInfo text-[white] text-xs flex justify-center m-2.5 text-center">
-            <p>Begin: <span class="beginContract">2025-01-13</span></p>
-            <p>End: <span class="endContract">2025-03-14</span></p>
-            <p>Signed by: Abdelmalek</p>
+        <div class="contratInfo text-[white] gap-5 text-xs flex justify-center m-2.5 text-center">
+            <p>Begin:<br> <span class="beginContract"><?php echo $line["dateBegin"]; ?></span></p>
+            <p>End:<br> <span class="endContract"><?php echo $line["dateEnd"]; ?></span></p>
+            <p>Signed by:<br> <span class="signedBy"><?php echo $line["clientName"]; ?></span></p>
+            <p>Car: <?php echo $line["carName"]; ?></p>
         </div>
         <div class="buttons flex justify-around m-2.5 flex justify-around m-2.5">
             <button class="modifyContract bg-[chocolate] text-[white] p-[5px] rounded-[5px]">Modify</button>
             <button class="deleteContract bg-[chocolate] text-[white] p-[5px] rounded-[5px]">Delete</button>
         </div>
     </div>
+    <?php endwhile; ?>
 
-    <div id="2" class="w-[300px] overflow-hidden bg-[cadetblue] rounded-[10px]">
-        <img src="https://mae-avocats.com/wp-content/uploads/2022/06/images-contrat.jpg" alt="">
-        <div class="contratInfo text-[white] text-xs flex justify-center m-2.5 text-center">
-        <p>Begin: <span class="beginContract">2025-01-13</span></p>
-            <p>End: <span class="endContract">2025-03-14</span></p>
-            <p>Signed by: Abdelmalek</p>
-        </div>
-        <div class="buttons flex justify-around m-2.5 flex justify-around m-2.5">
-            <button class="modifyContract bg-[chocolate] text-[white] p-[5px] rounded-[5px]">Modify</button>
-            <button class="deleteContract bg-[chocolate] text-[white] p-[5px] rounded-[5px]">Delete</button>
-        </div>
-    </div>
-
-    <div id="3" class="w-[300px] overflow-hidden bg-[cadetblue] rounded-[10px]">
-        <img src="https://mae-avocats.com/wp-content/uploads/2022/06/images-contrat.jpg" alt="">
-        <div class="contratInfo text-[white] text-xs flex justify-center m-2.5 text-center">
-        <p>Begin: <span class="beginContract">2025-01-13</span></p>
-            <p>End: <span class="endContract">2025-03-14</span></p>
-            <p>Signed by: Abdelmalek</p>
-        </div>
-        <div class="buttons flex justify-around m-2.5 flex justify-around m-2.5">
-            <button class="modifyContract bg-[chocolate] text-[white] p-[5px] rounded-[5px]">Modify</button>
-            <button class="deleteContract bg-[chocolate] text-[white] p-[5px] rounded-[5px]">Delete</button>
-        </div>
-    </div>
-
-    <div id="4" class="w-[300px] overflow-hidden bg-[cadetblue] rounded-[10px]">
-        <img src="https://mae-avocats.com/wp-content/uploads/2022/06/images-contrat.jpg" alt="">
-        <div class="contratInfo text-[white] text-xs flex justify-center m-2.5 text-center">
-            <p>Begin: <span class="beginContract">2025-01-13</span></p>
-            <p>End: <span class="endContract">2025-03-14</span></p>
-            <p>Signed by: Abdelmalek</p>
-        </div>
-        <div class="buttons flex justify-around m-2.5 flex justify-around m-2.5">
-            <button class="modifyContract bg-[chocolate] text-[white] p-[5px] rounded-[5px]">Modify</button>
-            <button class="deleteContract bg-[chocolate] text-[white] p-[5px] rounded-[5px]">Delete</button>
-        </div>
-    </div>
-
-    <div id="5" class="w-[300px] overflow-hidden bg-[cadetblue] rounded-[10px]">
-        <img src="https://mae-avocats.com/wp-content/uploads/2022/06/images-contrat.jpg" alt="">
-        <div class="contratInfo text-[white] text-xs flex justify-center m-2.5 text-center">
-            <p>Begin: <span class="beginContract">2025-01-13</span></p>
-            <p>End: <span class="endContract">2025-03-14</span></p>
-            <p>Signed by: Abdelmalek</p>
-        </div>
-        <div class="buttons flex justify-around m-2.5 flex justify-around m-2.5">
-            <button class="modifyContract bg-[chocolate] text-[white] p-[5px] rounded-[5px]">Modify</button>
-            <button class="deleteContract bg-[chocolate] text-[white] p-[5px] rounded-[5px]">Delete</button>
-        </div>
-    </div>
     </main>
 
 
     <!-- Form add Contract -->
-    <form class="AddContractForm hidden w-[600px] bg-[brown] h-[300px] fixed left-[calc(50%_-_300px)] p-10 rounded-[20px] top-[120px]" action="" method="">
+    <form class="AddContractForm hidden w-[600px] bg-[brown] h-[300px] fixed left-[calc(50%_-_300px)] p-10 rounded-[20px] top-[120px]" action="./php/addContract.php" method="POST">
 
         <div class="inputsAndLabels h-[85%]">
             <label for="" class="block">
@@ -108,11 +63,11 @@ $action2 = mysqli_query($connection,$sql_command2);
                     <?php while($line2 = mysqli_fetch_assoc($action2)): ?>
                     <option value="<?php echo $line2["id"]; ?>"><?php echo $line2["name"]; ?></option>
                     <?php endwhile; ?>
-                </select>
+                </select> 
             </label>
             <label for="">
                 Cars:
-                <select class="block w-full rounded-[10px]" name="" name="AddCarSelect">
+                <select class="block w-full rounded-[10px]" name="AddCarSelect">
                     <?php while($line1 = mysqli_fetch_assoc($action1)): ?>
                     <option value="<?php echo $line1["id"]; ?>"><?php echo $line1["name"]; ?></option>
                     <?php endwhile; ?>
@@ -120,11 +75,11 @@ $action2 = mysqli_query($connection,$sql_command2);
             </label>
             <label for="">
             Begin:
-                <input class="w-full rounded-[10px]" type="date">
+                <input required class="w-full rounded-[10px]" name="beginDate" type="date">
             </label>
             <label for="">
             End:
-                <input class="w-full rounded-[10px]" type="date">
+                <input required class="w-full rounded-[10px]" name="endDate" type="date">
             </label>
         </div>
         <div class="addContractButts buttons flex justify-around m-2.5">
@@ -135,34 +90,36 @@ $action2 = mysqli_query($connection,$sql_command2);
     </form>
 
     <!-- Form Modify Contract -->
-<form class="modifyContractForm hidden w-[600px] bg-[brown] h-[300px] fixed left-[calc(50%_-_300px)] p-10 rounded-[20px] top-[120px]" action="" method="">
-        <input class="ContractIdModify" type="text" hidden>
+<form class="modifyContractForm hidden w-[600px] bg-[brown] h-[300px] fixed left-[calc(50%_-_300px)] p-10 rounded-[20px] top-[120px]" action="./php/modifyContract.php" method="POST">
+        <input name="ContractId" class="ContractIdModify" type="text" hidden>
         <div class="inputsAndLabels h-[85%]">
-            <input type="text" class="contractHiddenId hidden">
-            
-        <label for="" class="block">
+            <label for="" class="block">
                 Clients:
-                <select class="block w-full rounded-[10px]" name="" id="">
-                    <option value="">Client 1</option>
-                    <option value="">Client 2</option>
-                    <option value="">Client 3</option>
+                <select name="nameIdClient" class="block w-full rounded-[10px]">
+                        <?php mysqli_data_seek($action2, 0); ?>
+                    <?php while($line3 = mysqli_fetch_assoc($action2)): ?>
+                    <option value="<?php echo $line3["id"]; ?>"><?php echo $line3["name"]; ?></option>
+                    <?php endwhile; ?>
+
                 </select>
             </label>
             <label for="">
                 Cars:
-                <select class="block w-full rounded-[10px]" name="" id="">
-                    <option value="">Car 1</option>
-                    <option value="">Car 2</option>
-                    <option value="">Car 3</option>
+                <select class="block w-full rounded-[10px]" name="nameIdCar">
+                <?php mysqli_data_seek($action1, 0); ?>        
+                <?php while($line4 = mysqli_fetch_assoc($action1)): ?>
+                <option value="<?php echo $line4["id"]; ?>"><?php echo $line4["name"]; ?></option>
+                <?php endwhile; ?>
+                
                 </select>
             </label>
             <label for="">
             Begin:
-                <input class="beginDateContract w-full rounded-[10px]" type="date">
+                <input name="beginDateContract" class="beginDateContract w-full rounded-[10px]" type="date">
             </label>
             <label for="">
             End:
-                <input class="endDateContract w-full rounded-[10px]" type="date">
+                <input name="endDateContract" class="endDateContract w-full rounded-[10px]" type="date">
             </label>
         </div>
         <div class="addContractButts buttons flex justify-around m-2.5">
@@ -173,7 +130,7 @@ $action2 = mysqli_query($connection,$sql_command2);
 </form>
 
 <!-- Form Delete Contract -->
-<form class="deleteContractForm hidden w-[600px] bg-[brown] h-[300px] fixed left-[calc(50%_-_300px)] p-10 rounded-[20px] top-[120px]" action="" method="">
+<form class="deleteContractForm hidden w-[600px] bg-[brown] h-[300px] fixed left-[calc(50%_-_300px)] p-10 rounded-[20px] top-[120px]" action="./php/test.php" method="POST">
         <input class="contractIdDelete" type="text" hidden>
         <div class="h-[85%] text-center text-white">
             <h1>Are You Sure ?</h1>
