@@ -130,8 +130,8 @@ $action3 = mysqli_query($connection, $sql_command3);
 </form>
 
 <!-- Form Delete Contract -->
-<form class="deleteContractForm hidden w-[600px] bg-[brown] h-[300px] fixed left-[calc(50%_-_300px)] p-10 rounded-[20px] top-[120px]" action="./php/test.php" method="POST">
-        <input class="contractIdDelete" type="text" hidden>
+<form class="deleteContractForm hidden w-[600px] bg-[brown] h-[300px] fixed left-[calc(50%_-_300px)] p-10 rounded-[20px] top-[120px]" action="./php/deleteContract.php" method="POST">
+        <input name="contractDelete" class="contractIdDelete" type="text" hidden>
         <div class="h-[85%] text-center text-white">
             <h1>Are You Sure ?</h1>
         </div>
