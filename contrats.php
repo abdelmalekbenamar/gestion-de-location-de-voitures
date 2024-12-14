@@ -29,7 +29,7 @@ $action3 = mysqli_query($connection, $sql_command3);
 <!-- Header -->
 <?php include_once("./php/menu.php"); ?>
     
-    <div class="addContract text-[white] bg-[coral] p-[5px] rounded-[5px] w-fit mt-[30px] mb-0 mx-auto">
+    <div class="addContract text-[white] bg-[coral] p-[5px] rounded-[5px] w-fit mt-[100px] mb-0 mx-auto">
         <button id="addContractButton">Add Contract</button>
     </div>
     <main class="flex justify-center flex-wrap gap-5 mt-[30px] p-5">

@@ -25,7 +25,7 @@ $action = mysqli_query($connection, $sql_command);
 <!-- Header -->
 <?php include_once("./php/menu.php"); ?>
 
-    <div class="addClient text-[white] bg-[coral] p-[5px] rounded-[5px] w-fit mt-[30px] mb-0 mx-auto">
+    <div class="addClient text-[white] bg-[coral] p-[5px] rounded-[5px] w-fit mt-[100px] mb-0 mx-auto">
         <button id="addClientButton">Add Client</button>
     </div>
 

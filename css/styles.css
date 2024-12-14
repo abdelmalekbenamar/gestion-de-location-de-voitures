@@ -4,7 +4,42 @@
     box-sizing: border-box;
 }
 
+body{
+    background-image: url("https://media.istockphoto.com/id/1478784162/fr/vectoriel/mod%C3%A8le-donde-vectorielle-transparente.jpg?s=612x612&w=0&k=20&c=8Pehpm9KJpwIk7aHqB2f9NMgnAgxl5xg0zZ4ab_qhqA=");
 
+}
+body.body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+nav{
+    top: 20px;
+}
+.connexionForm{
+    width: 330px;
+    text-align: center;
+}
+.formInput{
+    width: 90%;
+    height: 35px;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+}
+.submit{
+    display: flex;
+    justify-content: center;
+}
+.connexionButtin{
+    background-color:cadetblue;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 15px;
+
+}
 
 
 
