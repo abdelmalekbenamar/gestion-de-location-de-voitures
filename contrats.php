@@ -151,6 +151,13 @@ $action3 = mysqli_query($connection, $sql_command3);
 </form>
 
 
+<form class="logOut" action="./php/logOut.php" method="POST">
+    <p><?php echo $_SESSION["user"] ?></p>
+    <div>
+        <button class="logoutButton" type="submit">Log out</button>
+    </div>
+</form>
+
 
     <script src="./js/scriptContracts.js"></script>
 </body>

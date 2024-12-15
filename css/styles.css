@@ -40,6 +40,19 @@ nav{
     margin: 15px;
 
 }
+.logoutButton{
+    background-color: coral;
+    padding: 5px;
+    border-radius: 5px;
+}
+.logOut{
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    top: 80px;
+    left: 15px;
+}
 
 
 

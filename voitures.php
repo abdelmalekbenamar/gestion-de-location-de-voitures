@@ -118,8 +118,11 @@ $action = mysqli_query($connection, $sql_command);
         
 </form>
     
-<form action="./php/logOut.php" method="POST">
-    <button type="submit">Log out</button>
+<form class="logOut" action="./php/logOut.php" method="POST">
+    <p><?php echo $_SESSION["user"] ?></p>
+    <div>
+        <button class="logoutButton" type="submit">Log out</button>
+    </div>
 </form>
 
     <script src="./js/scriptCars.js"></script>
