@@ -1,3 +1,28 @@
+<?php 
+session_start();
+if(isset($_POST["mail"]) && isset($_POST["pass"])){
+    $server = "localhost";
+    $user = "root";
+    $password = "azl,kkk!";
+    $database = "location";
+
+    $connection = mysqli_connect($server, $user, $password, $database);
+    $sql_command = "SELECT * FROM users;";
+    $action = mysqli_query($connection, $sql_command);
+    while($line = mysqli_fetch_assoc($action)){
+        if($line["email"] == $_POST["mail"] && $line["pass"] == $_POST["pass"]){
+            $monEmail = $line["email"];
+        }
+    }
+    if(isset($monEmail)){
+        $_SESSION["user"] = $monEmail;
+        header("Location: ./voitures.php");
+    }
+}
+
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,14 +37,14 @@
 
 <!-- Header -->
 
-<form class="connexionForm" action="">
+<form class="connexionForm" action="./index.php" method="POST">
     <label for="">
         Email:
-        <input class="formInput mail" type="email">
+        <input name="mail" class="formInput mail" type="email">
     </label>
     <label for="">
         Password:
-        <input class="formInput pass" type="password">
+        <input name="pass" class="formInput pass" type="password">
     </label>
     <label class="submit" for="">
         <button class="connexionButtin" type="submit">Connexion</button>

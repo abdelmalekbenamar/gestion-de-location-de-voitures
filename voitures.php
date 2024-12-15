@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+if(!isset($_SESSION["user"])){
+
+    header("Location: ./index.php");
+}
 $server = "localhost";
 $user = "root";
 $password = "azl,kkk!";
@@ -112,6 +118,9 @@ $action = mysqli_query($connection, $sql_command);
         
 </form>
     
+<form action="./php/logOut.php" method="POST">
+    <button type="submit">Log out</button>
+</form>
 
     <script src="./js/scriptCars.js"></script>
 </body>
